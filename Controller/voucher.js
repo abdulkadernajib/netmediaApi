@@ -27,3 +27,8 @@ exports.addCreditors = async (req, res) => {
         res.status(400).send(err);
     }
 };
+
+exports.getDebtors = async (req, res) => {
+    const debtors = await Debtors.find();
+    res.status(201).send(state)
+};
