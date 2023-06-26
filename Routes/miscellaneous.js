@@ -4,5 +4,7 @@ const router = express.Router();
 
 
 exports.router = router
-    .get('/city', Controller.getCity)
+    .get('/city/:state', Controller.getCity)
     .get('/state', Controller.getState)
+    .post('/user/register', Controller.createUser)
+    .post('/user', Controller.verifyUser)

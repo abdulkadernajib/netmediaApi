@@ -17,9 +17,20 @@ const modelsSchema = new Schema({
   color: { type: String },
   countryOfOrigin: { type: String },
   asin: { type: String },
-  closingStock: { type: Number }
-});
+  sellingPrice: { type: Number },
+},
+  { timestamps: true }
+);
+
+const imeiSchema = new Schema({
+  imeiNumber: String,
+  modelId: { type: mongoose.Schema.Types.ObjectId, ref: 'models' },
+  costPrice: Number,
+  salesPrice: Number,
+  isAvailable: Boolean
+})
 
 
 exports.Brand = mongoose.model('brand', brandsSchema);
 exports.Model = mongoose.model('model', modelsSchema);
+exports.Imei = mongoose.model('imei', imeiSchema);
