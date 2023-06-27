@@ -1,5 +1,4 @@
 const express = require('express');
-require('dotenv').config()
 const app = express();
 const bodyParser = require('body-parser');
 const authorize = require('./authorize')
@@ -14,7 +13,8 @@ const { Db } = require('./db')
 //.use method is used for middleware
 // app.use(authorize)
 app.use(express.json()) //to parse Json data
-app.use(cors({ origin: process.env.UI_URL }));
+app.use(cors());
+// app.use(cors({ origin: process.env.UI_URL }));
 app.use('/api/', ProductRouter.router);
 app.use('/api/', VoucherRouter.router);
 app.use('/api/', miscellaneos.router);
