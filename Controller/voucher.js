@@ -205,12 +205,11 @@ exports.addPurchaseInvoice = expressAsyncHandler(async (req, res) => {
             let imei = item.imei;
             let modelId = item.product;
 
-
-            models = await Product.findByIdAndUpdate(modelId, { $push: { imei: imei } }, { new: true });
             createImei = new Imei({
                 imeiNumber: imei,
                 modelId: modelId,
-                costPrice: item.cost
+                costPrice: item.amount,
+                isAvailable: true
             })
             await createImei.save();
 
@@ -275,4 +274,15 @@ exports.getSales = expressAsyncHandler(async (req, res) => {
     console.log(_id);
     sales = await Sales.find(_id)
     res.status(200).json(sales);
+})
+
+exports.getPurRefNo = expressAsyncHandler(async (req, res) => {
+    var count = await Purchases.countDocuments() + 1
+    let refNo = count.toString().padStart(5, '0')
+    res.status(200).json(refNo)
+})
+exports.getSalInvNo = expressAsyncHandler(async (req, res) => {
+    var count = await Sales.countDocuments() + 1
+    let invNo = count.toString().padStart(5, '0')
+    res.status(200).json(invNo)
 })

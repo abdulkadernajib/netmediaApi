@@ -9,6 +9,8 @@ exports.router = router
     .post('/creditor', voucherController.addCreditors)
     .post('/purchase', voucherController.addPurchaseInvoice)
     .post('/sales', voucherController.addSalesInvoice)
+    .get('/purchaseinv', voucherController.getPurRefNo)
+    .get('/salesinv', voucherController.getSalInvNo)
     .get('/purchase/:_id?', voucherController.getPurchases)
     .get('/sales/:_id?', voucherController.getSales)
     .get('/debtor/all', voucherController.getDebtors)

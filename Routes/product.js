@@ -13,4 +13,4 @@ exports.router = router
     .get('/mobile/brand/:brand', productController.getMobileByBrand)
     .put('/mobile/:id', productController.updateMobile)
     .delete('/mobile/:id', productController.deleteMobile)
-    .get('/imei/:modelId', productController.getProductsImeiList)
+    .get('/imei/:modelId?', productController.getProductsImeiList)

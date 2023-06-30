@@ -4,7 +4,6 @@ const Product = require('../Models/product')
 const Brand = Product.Brand;
 const Model = Product.Model;
 const Imei = Product.Imei;
-const currentDate = new Date().toString();
 
 
 exports.addBrand = async (req, res) => {
@@ -55,7 +54,6 @@ exports.getMobileById = async (req, res) => {
         // const mobile = await Model.findOne({ _id: _id }).exec()
         const mobile = await Model.findById(_id)
         res.send({ mobile })
-        console.log(_id)
     }
     catch (err) {
         error = err
@@ -88,10 +86,11 @@ exports.updateMobile = async (req, res) => {
         modelName: req.body.modelName,
         color: req.body.color,
         countryOfOrigin: req.body.countryOfOrigin,
-        ASIN: req.body.ASIN,
+        ASIN: req.body.asin,
         closingStock: req.body.closingStock,
         sellingPrice: req.body.sellingPrice,
-        lastUpdated: currentDate
+        gstRate: req.body.gstRate,
+        hsn: req.body.hsn
     }
 
 
@@ -117,7 +116,7 @@ exports.deleteMobile = async (req, res) => {
 }
 
 exports.getProductsImeiList = async (req, res) => {
-    productId = req.params
+    productId = req.params.modelId ? req.params : {}
     try {
         imeiList = await Imei.find(productId)
         res.status(200).json(imeiList)

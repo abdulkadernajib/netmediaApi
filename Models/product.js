@@ -18,6 +18,8 @@ const modelsSchema = new Schema({
   countryOfOrigin: { type: String },
   asin: { type: String },
   sellingPrice: { type: Number },
+  gstRate: { type: Number },
+  hsn: { type: String }
 },
   { timestamps: true }
 );

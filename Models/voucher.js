@@ -31,62 +31,63 @@ const partySchema = new Schema({
 
 
 const purchaseSchema = new Schema({
-    creditorId: {
+    creditor: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "creditors"
     },
-    creditorName: { type: String },
+    date: { type: Date },
     invoiceNo: {
         type: String,
-        required: true,
-        unique: true,
+        required: true
     },
     voucherNo: { type: Number },
-    address: { type: String },
-    phone: { type: String },
-    phone2: { type: String },
     total: { type: Number },
-    gst: { type: Number },
-    netTotal: { type: Number },
-    details: [{
-        product: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "models"
-        },
-        imei: { type: String },
-        cost: { type: Number }
-    }]
+    isIntraState: { Type: Boolean },
+    cgst: { type: Number },
+    sgst: { type: Number },
+    igst: { type: Number },
+    details: {
+        type: [{
+            product: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "models"
+            },
+            imei: { type: String },
+            amount: { type: Number }
+        }], required: true
+    }
 },
     { timestamps: true }
 )
 
 const salesSchema = new Schema({
-    creditorId: {
+    debtorId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "debtors"
     },
-    creditorName: { type: String },
+    date: { type: Date },
     invoiceNo: {
         type: String,
         required: true,
         unique: true,
     },
     voucherNo: { type: Number },
-    address: { type: String },
     deliveryAddress: { type: String },
-    phone: { type: String },
-    phone2: { type: String },
     total: { type: Number },
-    gst: { type: Number },
-    netTotal: { type: Number },
-    details: [{
-        product: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "models"
-        },
-        imei: { type: String },
-        amount: { type: Number }
-    }]
+    isIntraState: { Type: Boolean },
+    cgst: { type: Number },
+    sgst: { type: Number },
+    igst: { type: Number },
+    details: {
+        type: [{
+            product: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "models"
+            },
+            imei: { type: String },
+            amount: { type: Number }
+        }], required: true
+    }
 },
     { timestamps: true }
 )
