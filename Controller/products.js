@@ -1,4 +1,4 @@
-
+const expressAsyncHandler = require("express-async-handler");
 const Product = require('../Models/product')
 
 const Brand = Product.Brand;
@@ -53,11 +53,11 @@ exports.getMobileById = async (req, res) => {
     try {
         // const mobile = await Model.findOne({ _id: _id }).exec()
         const mobile = await Model.findById(_id)
-        res.send({ mobile })
+        res.status(201).send({ mobile })
     }
     catch (err) {
         error = err
-        res.status(400).send(error);
+        res.status(404).send(error);
     }
 
 };
@@ -109,20 +109,30 @@ exports.deleteMobile = async (req, res) => {
 
     try {
         await Model.findByIdAndDelete(_id)
-        res.status(200).json(`_id: ${_id} deleted..`)
+        res.status(201).json(`_id: ${_id} deleted..`)
     } catch (error) {
-        res.status(400).json(error)
+        res.status(404).json(error)
     }
 }
 
-exports.getProductsImeiList = async (req, res) => {
-    productId = req.params.modelId ? req.params : {}
+exports.getProductsImeiList = expressAsyncHandler(async (req, res) => {
+    const productId = req.params.modelId ? req.params : {}
     try {
         imeiList = await Imei.find(productId)
-        res.status(200).json(imeiList)
+        res.status(201).json(imeiList)
     } catch (error) {
-        res.status(400).json(error)
+        res.status(404).json(error)
     }
-}
+})
+
+exports.getUnsoldImeiList = expressAsyncHandler(async (req, res) => {
+    const productId = req.params.modelId ? req.params.modelId : ''
+    try {
+        imeiList = await Imei.find({ modelId: productId, isAvailable: true })
+        res.status(201).json(imeiList)
+    } catch (error) {
+        res.status(404).json(error)
+    }
+})
 
 

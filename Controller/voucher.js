@@ -245,8 +245,6 @@ exports.addSalesInvoice = expressAsyncHandler(async (req, res) => {
         details.forEach(async item => {
             let imei = item.imei;
 
-            console.log(imei);
-
             updateImei = await Imei.findByIdAndUpdate(imei, {
                 salesPrice: item.amount,
                 isAvailable: false
@@ -271,7 +269,6 @@ exports.addSalesInvoice = expressAsyncHandler(async (req, res) => {
 
 exports.getSales = expressAsyncHandler(async (req, res) => {
     const _id = req.params._id ? req.params : {}
-    console.log(_id);
     sales = await Sales.find(_id)
     res.status(200).json(sales);
 })

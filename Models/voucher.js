@@ -61,7 +61,7 @@ const purchaseSchema = new Schema({
 )
 
 const salesSchema = new Schema({
-    debtorId: {
+    debtor: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "debtors"
     },
@@ -73,6 +73,7 @@ const salesSchema = new Schema({
     },
     voucherNo: { type: Number },
     deliveryAddress: { type: String },
+    delPhone: { type: String },
     total: { type: Number },
     isIntraState: { Type: Boolean },
     cgst: { type: Number },
